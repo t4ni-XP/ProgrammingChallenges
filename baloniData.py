@@ -1,8 +1,9 @@
 from random import randint
 
-N = 1000
-print(N)
+N = 10000
+f = open("input.txt", "w")
+print(N, file=f)
 for _ in range(N):
-    print(randint(1,N), end=' ')
-
+    print(randint(1,N), end=' ', file=f)
+f.close()
 print()
