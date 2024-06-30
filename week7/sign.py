@@ -1,35 +1,39 @@
 import sys
 input = sys.stdin.readline
+from collections import deque
 
-
-testcases: list[dict] = []
 n: int = int(input())
+# print(n)
+
+test_cases = []
 for _ in range(n):
     k, w = map(int, input().split())
-    wards = []
-    for _ in range(w):
-        wards.append(input().split()[0])
-    testcases.append([k, w, wards])
+    words: list[str] = [input().strip() for _ in range(w)]
+    test_cases.append((k, w, words))
 
-for case in testcases:
-    print(case)
-    k, w, words = case
-    dp = [float("inf")] * w
-    dp[0] = k
-    results = []
+# print(test_cases)
 
-    for i in range(w):
-        for j in range(i + 1, w):
-            print(words[i], words[j])
-            overlap = 0
-            for l in range(1,k):
-                print(words[i][-l:], words[j][:l])
-                if words[i][-l:] == words[j][:l]:
-                        overlap = l
-                # else:
-                #      break
-            print(overlap)
-            dp[j] = min(dp[j], dp[i] + (k - overlap))
-            print("--------")
-    print(dp)
-        
+for k, w, words in test_cases:
+    current_chars: deque[str] = deque()
+    min_chars: int = 0
+
+    for word in words:
+        last_id = 
+        for char in word:
+            if char not in current_chars:
+                if len(current_chars) == k:
+                    min_chars += 1
+                    current_chars.popleft()
+                current_chars.append(char)
+                print(current_chars)
+                continue
+            current_id = current_chars.index(char)
+            if current_id != last_id + 1:
+                if len(current_chars) == k:
+                    min_chars += 1
+                    current_chars.popleft()
+                current_chars.append(char)
+                print(current_chars)
+    
+    print(min_chars + len(current_chars))
+
